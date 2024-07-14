@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import PrivateLayout from "../../layouts/Private";
 
-
 import PdfDocument from "../../components/PdfViewerImage";
 
 import { pdfjs } from "react-pdf";
@@ -11,7 +10,6 @@ import { Box, CircularProgress } from "@mui/material";
 import { ParametersDefault, ProcessingResultType } from "../../types";
 
 import Carousel from "../../components/Carousel";
-import ModalLoading from "../../components/ModalLoading";
 import { processingShowResult } from "../../services/getProcessingShowResult";
 import { getDownloadDataset } from "../../services/getDownloadDataset";
 
@@ -32,13 +30,12 @@ const ResultPage = () => {
   const [parametersDefault, setParametersDefault] =
     useState<ParametersDefault>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLoadingError, setIsLoadingError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/parametersDefault.json",
+          "http://localhost:80/parametersDefault.json",
           {
             headers: {
               accept: "application/json",
@@ -56,8 +53,6 @@ const ResultPage = () => {
     fetchData();
   }, []);
 
-
-
   useEffect(() => {
     const handleFile = async () => {
       setIsLoading(true);
@@ -65,7 +60,7 @@ const ResultPage = () => {
       if (processingId.id) {
         const result = await processingShowResult(processingId.id);
         const fileDonwload = await getDownloadDataset(processingId.id);
-     
+
         if (result && result.imagesObject) {
           setFiles(result.imagesObject);
           setParameters(result.selectedResultParameters);
@@ -73,8 +68,6 @@ const ResultPage = () => {
           setIsLoading(false);
         }
       }
-      //setIsLoading(false);
-      // Adicionar que deu errado o carregamento
     };
 
     handleFile();
