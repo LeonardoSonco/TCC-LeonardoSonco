@@ -1,5 +1,4 @@
 import Root from "./pages/Root";
-  
 
 function App() {
   return <Root />;

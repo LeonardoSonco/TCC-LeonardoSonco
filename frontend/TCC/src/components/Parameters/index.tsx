@@ -47,19 +47,16 @@ const Parameters = ({ setListCampaignsList }: any) => {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    const errors: Record<string, string> = {};
     if (event.target.value) {
       setCampaignSelected(event.target.value);
 
       if (event.target.value != "customize" && campaigns) {
-       
-       // antes de modificar o parametro verifica se nao dataset pré selecionado
+        // antes de modificar o parametro verifica se nao dataset pré selecionado
         setCustomParametersCampaing((prevState) => ({
           ...campaigns[event.target.value],
           datasetSelected: prevState.datasetSelected,
         }));
       } else if (event.target.value === "customize" && campaigns) {
-       
         setCustomParametersCampaing((prevState) => ({
           ...campaigns[event.target.value],
           datasetSelected: prevState.datasetSelected,

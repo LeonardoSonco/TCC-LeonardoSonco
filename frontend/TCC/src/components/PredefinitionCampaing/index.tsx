@@ -1,5 +1,5 @@
 import { Eye, EyeOff, Trash } from "react-feather";
-import { Campaign, ListCampaing } from "../../types";
+import { Campaign } from "../../types";
 import { useState } from "react";
 import { postUploadDataset } from "../../services/postUploadDataset";
 

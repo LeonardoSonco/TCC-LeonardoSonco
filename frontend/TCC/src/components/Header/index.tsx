@@ -139,10 +139,7 @@ const Header: React.FC<HeaderExecutionEnvironment> = ({
           <nav>
             <ul className="flex items-center gap-10 font-medium">
               {isExecutionEnvironment ? (
-                <>
-
-                  
-                </>
+                <></>
               ) : (
                 <>
                   <Link to="/about/cgans" className={`hover:border-b-2 `}>

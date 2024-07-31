@@ -1,17 +1,17 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function (app) {
+module.exports = function(app) {
   app.use(
-    '/api', // agora para passar a url não precisa passar tudo apenas /api/ (e o resto do endpoint)
+    '/api', // ajusta a rota conforme necessário
     createProxyMiddleware({
-      target: 'http://localhost:3333', // url do servidor do autodroid
+      target: 'http://localhost:3333', // ajuste conforme necessário
       changeOrigin: true,
-      pathRewrite: {
-        '^/api': '', // rmove o '/api' da URL
-      },
       onProxyRes: function (proxyRes, req, res) {
-        proxyRes.headers['Access-Control-Allow-Origin'] = '*'; // nessa função faz com que o navegador aceite a respota, mesmo que venha de uma origem diferente, fazendo com que nao de problema de CORS
-      },
+        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+      }
     })
   );
 };
+
+
+

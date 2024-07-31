@@ -1,8 +1,5 @@
-import { Info, Plus, Minus } from "react-feather";
-import { useCallback, useState } from "react";
-import Tooltip from "@mui/material/Tooltip";
-import Zoom from "@mui/material/Zoom";
-import style from "./index.module.css";
+import { Plus, Minus } from "react-feather";
+import { useCallback } from "react";
 
 interface NumericTypeParametersProps {
   label: string;
@@ -21,7 +18,6 @@ const FormInput: React.FC<NumericTypeParametersProps> = ({
   };
 
   const decreaseValue = useCallback(() => {
-
     if (parseInt(value) > 0) {
       const newValue = parseInt(value) - 1;
       onChange(newValue);
@@ -35,7 +31,9 @@ const FormInput: React.FC<NumericTypeParametersProps> = ({
 
   return (
     <>
-      <div className={`flex items-center py-1 justify-between max-xs+:flex-col`}>
+      <div
+        className={`flex items-center py-1 justify-between max-xs+:flex-col`}
+      >
         <div className="flex items-center">
           <h4 className="mr-3 px-1 font-bold">{label}</h4>
         </div>
@@ -53,7 +51,7 @@ const FormInput: React.FC<NumericTypeParametersProps> = ({
             className="border-none w-14 h-6 text-center"
           />
           <button type="button" onClick={increaseValue} className={`px-1`}>
-            <Plus  size={14} />
+            <Plus size={14} />
           </button>
         </div>
       </div>

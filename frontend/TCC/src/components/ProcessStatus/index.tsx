@@ -4,12 +4,16 @@ import Zoom from "@mui/material/Zoom";
 import { Link } from "react-router-dom";
 
 const ProcessStatus = ({ name, processStatus }: any) => {
- 
-
   return (
     <>
       <div className="shadow-shadowBox rounded-xl mb-6 cursor-pointer mx-10 hover:scale-101  transition-all">
-        <Link to={processStatus.status === "SUCCEEDED" ? `/training/result/${name}/${processStatus.id}` : "/training"} > 
+        <Link
+          to={
+            processStatus.status === "SUCCEEDED"
+              ? `/training/result/${name}/${processStatus.id}`
+              : "/training"
+          }
+        >
           <div className="flex justify-between items-center px-10 py-5 max-sm:flex-col max-sm: gap-2 text-center">
             <div>
               <h4 className="font-bold">Parâmetros:</h4>

@@ -1,4 +1,3 @@
-import { Canvas } from "@react-pdf/renderer";
 import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
