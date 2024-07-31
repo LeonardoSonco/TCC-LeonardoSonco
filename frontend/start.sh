@@ -1,22 +1,26 @@
 #!/bin/bash
 
-# Verifica se o Docker está instalado
-if ! command -v docker &> /dev/null; then
-  echo "Error: Docker is not installed."
+# Função para exibir uma mensagem de erro e sair do script
+function error_exit {
+  echo "$1" 1>&2
   exit 1
+}
+
+# Caminho do diretório da TCC
+DIRECTORY="./TCC"
+
+# Verifica se o diretório existe
+if [ ! -d "$DIRECTORY" ]; then
+  error_exit "Erro: Diretório $DIRECTORY não encontrado."
 fi
 
-# Verifica se docker-compose está instalado e executa o compose
-if docker compose --version &> /dev/null; then
-  #docker compose pull
-  docker compose up   # Executa em modo detached para manter o contêiner em execução
-elif command -v docker-compose &> /dev/null; then
-  #docker-compose pull
-  docker-compose up   # Executa em modo detached para manter o contêiner em execução
-else
-  echo "Error: docker-compose is not installed."
-  exit 1
-fi
+# Entra no diretório da TCC
+cd "$DIRECTORY" || error_exit "Erro: Não foi possível entrar no diretório $DIRECTORY."
 
-# Desliga o contêiner quando o usuário pressionar Enter
-docker compose down
+# Executa npm install
+npm install || error_exit "Erro: Falha ao executar npm install."
+
+# Executa npm run dev
+npm run dev || error_exit "Erro: Falha ao executar npm run dev."
+
+echo "Script executado com sucesso!"
