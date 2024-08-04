@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { RefreshCw } from "react-feather";
@@ -19,6 +19,9 @@ const TrainingPage: React.FC = () => {
   const [processStatus, setProcessStatus] = useState<any>();
   const [isSpinning, setIsSpinning] = useState(false);
 
+  const [intervalId, setIntervalId] = useState<number | undefined>(undefined);
+  const isProcessReady = useRef(false);
+
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -27,7 +30,7 @@ const TrainingPage: React.FC = () => {
     } else {
       console.log(currentUserId);
     }
-  }, []); // Executa apenas uma vez após a montagem do componente
+  }, []);
 
   const handleRegisterUser = async () => {
     await registerUser();
@@ -39,9 +42,45 @@ const TrainingPage: React.FC = () => {
 
     setTimeout(async () => {
       setIsSpinning(false);
-      setProcessStatus(await getProcessingStatus());
+      const status = await getProcessingStatus();
+      setProcessStatus(status);
+
+      if (status) {
+        const allProcessesReady = Object.values(status).every((processList) =>
+          processList.every((process) => process.status === "SUCCEEDED")
+        );
+
+        if (allProcessesReady) {
+          if (intervalId !== undefined) {
+            clearInterval(intervalId);
+          }
+          isProcessReady.current = true;
+        }
+      }
     }, 1000);
   };
+
+  useEffect(() => {
+    if (!isProcessReady.current) {
+      const id = setInterval(
+        handleReloadProcessStatus,
+        5000
+      ) as unknown as number;
+      setIntervalId(id);
+    }
+
+    return () => {
+      if (intervalId !== undefined) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [intervalId]);
+
+  useEffect(() => {
+    if (isProcessReady.current && intervalId !== undefined) {
+      clearInterval(intervalId);
+    }
+  }, [isProcessReady.current]);
 
   return (
     <>
