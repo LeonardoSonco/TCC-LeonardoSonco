@@ -35,7 +35,7 @@ const ResultPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:80/parametersDefault.json",
+          "http://localhost:3000/parametersDefault.json",
           {
             headers: {
               accept: "application/json",
