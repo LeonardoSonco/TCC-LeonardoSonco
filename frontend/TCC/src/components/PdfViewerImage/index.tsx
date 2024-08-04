@@ -18,7 +18,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
   const [pdfFileWidth, setPdfFileWidth] = useState(300);
   const [pdfFileScale, setPdfFileScale] = useState(2.5);
   /*
-  debounce de lodash é serve para reduzir a 
+  debounce de lodash serve para reduzir a 
   frequência das chamadas de redimensionamento, 
   e o useCallback memoriza a função para evitar redefinição desnecessária.
   */
@@ -52,7 +52,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initialize the correct size
+    handleResize(); 
 
     return () => {
       window.removeEventListener("resize", handleResize);

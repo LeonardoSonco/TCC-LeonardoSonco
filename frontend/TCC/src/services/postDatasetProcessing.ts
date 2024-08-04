@@ -14,7 +14,7 @@ export const postDatasetProcessing = async (
 
   const processIdsJson = localStorage.getItem("processIds");
 
-  const processIds: string[] = processIdsJson ? JSON.parse(processIdsJson) : []; // converte string json para um array de strings
+  const processIds: string[] = processIdsJson ? JSON.parse(processIdsJson) : []; 
 
   try {
     const response: AxiosResponse<any> = await axios.post(

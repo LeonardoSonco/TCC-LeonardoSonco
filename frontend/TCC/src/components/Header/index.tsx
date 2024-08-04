@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import Logo from "../../assets/img/logoFaviconDark.svg";
-import { ArrowLeft, ArrowLeftCircle } from "react-feather";
 
 interface HeaderExecutionEnvironment {
   isExecutionEnvironment?: boolean;

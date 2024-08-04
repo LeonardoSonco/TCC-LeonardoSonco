@@ -27,17 +27,13 @@ const PredefinitionCampaing = ({ listCampaings, setListCampaigns }: any) => {
   };
 
   const handleRemoveCampaing = (index: number) => {
-    // faz a copia do array
     const updatedListCampaings = [...listCampaings];
     updatedListCampaings.splice(index, 1);
 
-    // atualiza o estado com copia do array
     setListCampaigns(updatedListCampaings);
   };
 
   const toggleVisibility = (index: number) => {
-    // atualiza o estado especifico do objeto que vai ser mostrado
-
     setVisibleCampaings((prevState) => ({
       ...prevState,
       [index]: !prevState[index],

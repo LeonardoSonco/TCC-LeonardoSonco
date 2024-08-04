@@ -17,8 +17,8 @@ const defaultCampaign: Campaign = {
 };
 
 const Parameters = ({ setListCampaignsList }: any) => {
-  const [campaigns, setCampaigns] = useState<Campaigns | null>(null); // campanhas que estão no json
-  const [campaignSelected, setCampaignSelected] = useState<string>(""); // campanha que foi selecionado no select
+  const [campaigns, setCampaigns] = useState<Campaigns | null>(null);
+  const [campaignSelected, setCampaignSelected] = useState<string>("");
   const [customParametersCampaing, setCustomParametersCampaing] =
     useState<Campaign>(defaultCampaign);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -50,8 +50,7 @@ const Parameters = ({ setListCampaignsList }: any) => {
     if (event.target.value) {
       setCampaignSelected(event.target.value);
 
-      if (event.target.value != "customize" && campaigns) {
-        // antes de modificar o parametro verifica se nao dataset pré selecionado
+      if (event.target.value !== "customize" && campaigns) {
         setCustomParametersCampaing((prevState) => ({
           ...campaigns[event.target.value],
           datasetSelected: prevState.datasetSelected,
@@ -126,7 +125,7 @@ const Parameters = ({ setListCampaignsList }: any) => {
               />
             );
           } else {
-            return null; // nao renderiza o datasetSelected
+            return null;
           }
         })}
       </>

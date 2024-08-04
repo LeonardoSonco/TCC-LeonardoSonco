@@ -48,7 +48,6 @@ export const processingShowResult = async (processingId: string) => {
     const imagesObject = Object.fromEntries(images);
 
     return { imagesObject, selectedResultParameters };
-    //return urls;
   } catch (error) {
     console.error("Falha em buscar o resultados:", error);
   }

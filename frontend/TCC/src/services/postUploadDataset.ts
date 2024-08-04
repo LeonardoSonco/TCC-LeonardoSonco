@@ -18,8 +18,8 @@ export const postUploadDataset = async (
 
     const datasetIds: string[] = datasetIdsJson
       ? JSON.parse(datasetIdsJson)
-      : []; // converte string json para um array de strings
-
+      : []; 
+      
     const formData = new FormData();
     formData.append("dataset", campaingParameters.parameters.datasetSelected);
     formData.append(

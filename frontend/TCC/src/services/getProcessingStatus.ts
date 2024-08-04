@@ -14,7 +14,7 @@ export const getProcessingStatus = async () => {
     }
 
     if (arrayProcessosIds.length > 0) {
-      // pegas os ids e nomes para fazer as requisições
+      
       const requests = arrayProcessosIds.map((item) => {
         const { id, name } = dividirStringParaObjeto(item);
         return axios
@@ -26,16 +26,16 @@ export const getProcessingStatus = async () => {
           .then((response) => ({ name, data: response.data.processing }));
       });
 
-      // espera as requisições ficarem prontas
+     
       const results = await Promise.all(requests);
 
-      // contruindo o objeto que retorna  retornado para o resultado
+      
       const processStatusMap: { [key: string]: any[] } = {};
       results.forEach((result) => {
         if (!processStatusMap[result.name]) {
-          processStatusMap[result.name] = []; // incia o array se a chave ainda não existir
+          processStatusMap[result.name] = []; 
         }
-        processStatusMap[result.name].push(result.data); // adiciona o valor ao array
+        processStatusMap[result.name].push(result.data); 
       });
 
       return processStatusMap;
